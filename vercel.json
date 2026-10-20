@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://alrahman87.dmango.online/api/$1"
+    },
+    {
+      "source": "/api",
+      "destination": "https://alrahman87.dmango.online/api/"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

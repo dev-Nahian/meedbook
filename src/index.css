@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+
+/* =========================
+    Tailwind V4 Theme
+    These auto-generate text-*, bg-*, border-* classes!
+========================= */
+@theme {
+  /* Colors */
+  --color-primary: #47C2FF;
+  --color-secondary: #274760;
+  --color-base-text: #111827;
+  --color-base-bg: #ffffff;
+  --color-base-border: #e5e4e7;
+  --color-accent: #aa3bff;
+  --color-accent-soft: #47C2FF0A;
+
+  /* Shadows */
+  --shadow-soft: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* =========================
+    Base Layout & Typography
+========================= */
+@layer base {
+  :root {
+    /* Base typography setup */
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+
+    /* Apply base colors */
+    color: var(--color-base-text);
+    background-color: var(--color-base-bg);
+
+    /* Force light mode only */
+    color-scheme: light;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (max-width: 1024px) {
+    :root {
+      font-size: 16px;
+    }
+  }
+
+  /* Base elements reset */
+  html, body {
+    @apply bg-base-bg text-base-text;
+    margin: 0;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+@layer utilities {
+  .gradient {
+    background: linear-gradient(
+      128deg,
+      rgba(255, 255, 255, 0.00) -7.9%,
+      rgba(71, 194, 255, 0.40) 39.01%,
+      rgba(71, 194, 255, 0.80) 86.31%
+    );
+  }
+  .gradientfaq {
+    background: linear-gradient(
+      128deg,
+      rgba(255, 255, 255, 0.00) -7.9%,
+      rgba(184, 231, 255, 0.4) 39.01%,
+      rgba(170, 227, 255, 0.8) 86.31%
+    );
+  }
+  .gradienttwo {
+    background: linear-gradient(
+      78deg,
+      rgba(41, 72, 85, 0.534) -7.9%,
+      rgba(40, 83, 104, 0.8) 39.01%,
+      rgba(6, 69, 100, 0.8) 86.31%
+    );
+  }
+}
