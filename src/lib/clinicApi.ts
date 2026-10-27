@@ -3,6 +3,7 @@ import {
   apiPostForm,
   apiPostJson,
   apiPatchForm,
+  apiPatchJson,
   apiPutForm,
   apiDelete,
   ApiClientError,
@@ -97,6 +98,7 @@ export type ClinicDetailsItem = ClinicBase & {
   longitude: string;
   per_treatment_price: string;
   accepted_patients: ClinicAcceptedPatient[];
+  accepted_infectious?: string[];
   payment_methods: ClinicPaymentMethod[];
   availabilities: ClinicAvailability[];
 };
@@ -504,6 +506,53 @@ export const submitClinicRating = async (
     }
     throw error;
   }
+};
+
+export const getClinicProfile = async (accessToken?: string | null) => {
+  try {
+    return await apiGet<ApiEnvelope<{ clinic: ClinicDetailsItem }>>("/clinics/profile/", {
+      accessToken,
+    });
+  } catch (error) {
+    if (error instanceof ApiClientError) {
+      throw new ClinicApiError(error.message, error.status);
+    }
+    throw error;
+  }
+};
+
+export const patchClinicProfile = async (
+  profileData: Record<string, any>,
+  accessToken?: string | null
+) => {
+  try {
+    return await apiPatchJson<ApiEnvelope<{ clinic: ClinicDetailsItem }>>(
+      "/clinics/profile/",
+      profileData,
+      { accessToken }
+    );
+  } catch (error) {
+    if (error instanceof ApiClientError) {
+      throw new ClinicApiError(error.message, error.status);
+    }
+    throw error;
+  }
+};
+
+export const updateClinicTreatments = async (
+  payload: {
+    treatments: Array<{
+      treatment_name: string;
+      treatment_code?: string | null;
+      price: string | number;
+      duration?: string | null;
+      description?: string | null;
+    }>;
+    accepted_infectious?: string[];
+  },
+  accessToken?: string | null
+) => {
+  return await patchClinicProfile(payload, accessToken);
 };
 
 export const updateClinicProfile = async (
